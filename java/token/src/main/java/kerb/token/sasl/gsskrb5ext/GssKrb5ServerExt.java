@@ -1,4 +1,4 @@
-package token.samples.sasl.gsskrb5ext;/*
+package kerb.token.sasl.gsskrb5ext;/*
  * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *

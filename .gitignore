@@ -3,6 +3,8 @@
 *.ipr
 *.iws
 
+java/nimbus-jose-jwt
+
 # Object files
 *.o
 *.ko

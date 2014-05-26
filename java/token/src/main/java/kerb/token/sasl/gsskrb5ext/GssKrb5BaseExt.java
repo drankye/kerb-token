@@ -23,7 +23,7 @@
  * questions.
  */
 
-package token.samples.sasl.gsskrb5ext;
+package kerb.token.sasl.gsskrb5ext;
 
 import com.sun.security.sasl.util.AbstractSaslImpl;
 import org.ietf.jgss.GSSContext;

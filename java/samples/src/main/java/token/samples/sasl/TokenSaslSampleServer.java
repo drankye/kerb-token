@@ -4,7 +4,7 @@ import org.ietf.jgss.GSSContext;
 import security.samples.Transport;
 import security.samples.sasl.SaslSampleServer;
 import token.samples.AuthzDataDumper;
-import token.samples.sasl.gsskrb5ext.GssKrb5ServerExt;
+import kerb.token.sasl.gsskrb5ext.GssKrb5ServerExt;
 
 import javax.security.sasl.SaslServer;
 import java.util.Map;
