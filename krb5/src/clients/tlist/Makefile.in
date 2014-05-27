@@ -1,0 +1,35 @@
+mydir=clients$(S)tlist
+BUILDTOP=$(REL)..$(S)..
+
+##WIN32##LOCALINCLUDES=-I$(BUILDTOP)\util\windows\
+
+SRCS = tlist.c
+
+##WIN32##VERSIONRC = $(BUILDTOP)\windows\version.rc
+##WIN32##RCFLAGS=$(CPPFLAGS) -I$(top_srcdir) -D_WIN32 -DRES_ONLY
+
+##WIN32##TLIST=$(OUTPRE)tlist.exe
+
+##WIN32##EXERES=$(TLIST:.exe=.res)
+
+##WIN32##$(EXERES): $(VERSIONRC)
+##WIN32##        $(RC) $(RCFLAGS) -DTLIST_APP -fo $@ -r $**
+
+all-unix:: tlist
+##WIN32##all-windows:: $(TLIST)
+
+tlist: tlist.o $(KRB5_BASE_DEPLIBS)
+	$(CC_LINK) -o $@ tlist.o $(KRB5_BASE_LIBS) $(TOPLIBD)/jwttoken$(SHLIBEXT)
+
+##WIN32##$(TLIST): $(OUTPRE)tlist.obj $(BUILDTOP)\util\windows\$(OUTPRE)getopt.lib $(SLIB) $(KLIB) $(CLIB) $(EXERES)
+##WIN32##	link $(EXE_LINKOPTS) -out:$@ $** ws2_32.lib $(SCLIB)
+##WIN32##	$(_VC_MANIFEST_EMBED_EXE)
+
+clean-unix::
+	$(RM) tlist.o tlist
+
+install-unix::
+	for f in tlist; do \
+	  $(INSTALL_PROGRAM) $$f \
+		$(DESTDIR)$(CLIENT_BINDIR)/`echo $$f|sed '$(transform)'`; \
+	done

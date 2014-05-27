@@ -1,0 +1,30 @@
+mydir=plugins$(S)preauth$(S)jwt
+BUILDTOP=$(REL)..$(S)..$(S)..
+MODULE_INSTALL_DIR = $(KRB5_PA_MODULE_DIR)
+
+LIBBASE=jwt
+LIBMAJOR=0
+LIBMINOR=0
+RELDIR=../plugins/preauth/jwt
+# Depends on libk5crypto and libkrb5
+SHLIB_EXPDEPS = $(KRB5_BASE_DEPLIBS) $(SUPPORT_LIB) $(TOPLIBD)/jwttoken$(SHLIBEXT)
+
+
+SHLIB_EXPLIBS= $(KRB5_BASE_LIBS)
+
+STLIBOBJS= \
+	jwt_srv.o \
+	jwt_clnt.o
+
+SRCS= $(srcdir)/jwt_srv.c $(srcdir)/jwt_clnt.c
+
+all-unix:: all-liblinks
+install-unix:: install-libs
+clean-unix:: clean-liblinks clean-libs clean-libobjs
+
+clean::
+	$(RM) lib$(LIBBASE)$(SO_EXT)
+
+@libnover_frag@
+@libobj_frag@
+

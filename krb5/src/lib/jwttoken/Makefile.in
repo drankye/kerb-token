@@ -1,0 +1,29 @@
+mydir=lib$(S)jwttoken
+BUILDTOP=$(REL)..$(S)..
+LOCALINCLUDES= -I.
+
+LIBBASE=jwttoken
+LIBMAJOR=1
+LIBMINOR=0
+RELDIR=jwttoken
+
+SHLIB_EXPDEPS = \
+	$(TOPLIBD)/libkrb5support$(SHLIBEXT) \
+	$(TOPLIBD)/libkrb5$(SHLIBEXT)
+SHLIB_EXPLIBS=-lkrb5 -lcom_err $(SUPPORT_LIB) $(DL_LIB) $(LIBS)
+
+SRCS= $(srcdir)/jwt_token.c
+
+STLIBOBJS= \
+	jwt_token.o
+
+all-unix:: all-liblinks
+install-unix:: install-libs
+clean-unix:: clean-liblinks clean-libs clean-libobjs
+
+clean::
+	
+
+@libnover_frag@
+@libobj_frag@
+
