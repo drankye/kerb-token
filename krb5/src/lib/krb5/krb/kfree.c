@@ -821,3 +821,36 @@ k5_free_pa_otp_req(krb5_context context, krb5_pa_otp_req *val)
     free(val->vendor.data);
     free(val);
 }
+
+void
+k5_free_jwt_tokeninfo(krb5_context context, krb5_jwt_tokeninfo *val)
+{
+    if (val == NULL)
+        return;
+    free(val->vendor.data);
+
+    free(val);
+}
+
+void
+k5_free_pa_jwt_challenge(krb5_context context, krb5_pa_jwt_challenge *val)
+{
+    krb5_jwt_tokeninfo **ti;
+
+    if (val == NULL)
+        return;
+    for (ti = val->tokeninfo; *ti != NULL; ti++)
+        k5_free_jwt_tokeninfo(context, *ti);
+    free(val->tokeninfo);
+    free(val);
+}
+
+void
+k5_free_pa_jwt_req(krb5_context context, krb5_pa_jwt_req *val)
+{
+    if (val == NULL)
+        return;
+    free(val->vendor.data);
+	free(val->token.data);
+    free(val);
+}

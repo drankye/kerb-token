@@ -1711,3 +1711,39 @@ static const struct atype_info *pa_otp_enc_req_fields[] = {
 };
 DEFSEQTYPE(pa_otp_enc_req, krb5_data, pa_otp_enc_req_fields);
 MAKE_CODEC(krb5_pa_otp_enc_req, pa_otp_enc_req);
+
+/* Definitions for JWT token extension */
+
+DEFFIELD_IMPLICIT(jwttokinfo_0, krb5_jwt_tokeninfo, vendor, 0, opt_utf8_data);
+static const struct atype_info *jwt_tokeninfo_fields[] = {
+    &k5_atype_jwttokinfo_0
+};
+DEFSEQTYPE(jwt_tokeninfo, krb5_jwt_tokeninfo, jwt_tokeninfo_fields);
+MAKE_CODEC(krb5_jwt_tokeninfo, jwt_tokeninfo);
+
+DEFPTRTYPE(jwt_tokeninfo_ptr, jwt_tokeninfo);
+DEFNONEMPTYNULLTERMSEQOFTYPE(seqof_jwt_tokeninfo, jwt_tokeninfo_ptr);
+DEFPTRTYPE(ptr_seqof_jwt_tokeninfo, seqof_jwt_tokeninfo);
+
+DEFFIELD_IMPLICIT(jwt_ch_0, krb5_pa_jwt_challenge, tokeninfo, 0,
+                  ptr_seqof_jwt_tokeninfo);
+static const struct atype_info *pa_jwt_challenge_fields[] = {
+    &k5_atype_jwt_ch_0
+};
+DEFSEQTYPE(pa_jwt_challenge, krb5_pa_jwt_challenge, pa_jwt_challenge_fields);
+MAKE_CODEC(krb5_pa_jwt_challenge, pa_jwt_challenge);
+
+DEFFIELD_IMPLICIT(jwt_req_0, krb5_pa_jwt_req, vendor, 0, opt_utf8_data);
+DEFFIELD_IMPLICIT(jwt_req_1, krb5_pa_jwt_req, token, 1, opt_utf8_data);
+static const struct atype_info *pa_jwt_req_fields[] = {
+    &k5_atype_jwt_req_0, &k5_atype_jwt_req_1
+};
+DEFSEQTYPE(pa_jwt_req, krb5_pa_jwt_req, pa_jwt_req_fields);
+MAKE_CODEC(krb5_pa_jwt_req, pa_jwt_req);
+
+DEFCTAGGEDTYPE_IMPLICIT(pa_jwt_enc_req_0, 0, ostring_data);
+static const struct atype_info *pa_jwt_enc_req_fields[] = {
+    &k5_atype_pa_jwt_enc_req_0
+};
+DEFSEQTYPE(pa_jwt_enc_req, krb5_data, pa_jwt_enc_req_fields);
+MAKE_CODEC(krb5_pa_jwt_enc_req, pa_jwt_enc_req);

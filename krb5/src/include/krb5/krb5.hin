@@ -974,6 +974,7 @@ krb5_c_keyed_checksum_types(krb5_context context, krb5_enctype enctype,
 #define KRB5_KEYUSAGE_IAKERB_FINISHED           42
 #define KRB5_KEYUSAGE_PA_PKINIT_KX              44
 #define KRB5_KEYUSAGE_PA_OTP_REQUEST  45  /**< See RFC 6560 section 4.2 */
+#define KRB5_KEYUSAGE_PA_JWT_REQUEST  46  /** JWT TOKEN EXTENSION */
 /* define in draft-ietf-krb-wg-preauth-framework*/
 #define KRB5_KEYUSAGE_FAST_REQ_CHKSUM 50
 #define KRB5_KEYUSAGE_FAST_ENC 51
@@ -1824,6 +1825,9 @@ krb5_verify_checksum(krb5_context context, krb5_cksumtype ctype,
 #define KRB5_PADATA_PKINIT_KX           147 /**< RFC 6112 */
 #define KRB5_ENCPADATA_REQ_ENC_PA_REP   149 /**< RFC 6806 */
 
+#define KRB5_PADATA_JWT_CHALLENGE       155 /**< JWT EXTENSION */
+#define KRB5_PADATA_JWT_REQUEST         156 /**< JWT EXTENSION */
+
 #define KRB5_SAM_USE_SAD_AS_KEY         0x80000000
 #define KRB5_SAM_SEND_ENCRYPTED_SAD     0x40000000
 #define KRB5_SAM_MUST_PK_ENCRYPT_SAD    0x20000000 /**< currently must be zero */
@@ -1850,6 +1854,7 @@ krb5_verify_checksum(krb5_context context, krb5_cksumtype ctype,
 #define KRB5_AUTHDATA_ETYPE_NEGOTIATION 129     /**< RFC 4537 */
 #define KRB5_AUTHDATA_SIGNTICKET        512     /**< formerly 142 in krb5 1.8 */
 #define KRB5_AUTHDATA_FX_ARMOR 71
+#define KRB5_AUTHDATA_JWT 81
 /** @} */ /* end of KRB5_AUTHDATA group */
 
 /* password change constants */

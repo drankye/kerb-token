@@ -82,6 +82,10 @@ encode_krb5_pa_fx_fast_reply
 encode_krb5_pa_otp_challenge
 encode_krb5_pa_otp_req
 encode_krb5_pa_otp_enc_req
+encode_krb5_pa_jwt_req
+encode_krb5_pa_jwt_enc_req
+encode_krb5_jwt_tokeninfo
+encode_krb5_pa_jwt_challenge
 encode_krb5_pa_s4u_x509_user
 encode_krb5_padata_sequence
 encode_krb5_pkinit_supp_pub_info
@@ -118,6 +122,9 @@ k5_free_algorithm_identifier
 k5_free_otp_tokeninfo
 k5_free_pa_otp_challenge
 k5_free_pa_otp_req
+k5_free_jwt_tokeninfo
+k5_free_pa_jwt_challenge
+k5_free_pa_jwt_req
 k5_free_serverlist
 k5_hostrealm_free_context
 k5_init_trace
