@@ -1336,6 +1336,7 @@ AC_CONFIG_FILES([build-tools/krb5-config], [chmod +x build-tools/krb5-config])
 AC_CONFIG_FILES([build-tools/kadm-server.pc
 	build-tools/kadm-client.pc
 	build-tools/kdb.pc
+	build-tools/jwttoken.pc
 	build-tools/krb5.pc
 	build-tools/krb5-gssapi.pc
 	build-tools/mit-krb5.pc
@@ -1348,6 +1349,7 @@ V5_AC_OUTPUT_MAKEFILE(.
 	util/verto
 
 	lib lib/kdb
+	lib/jwttoken
 
 	lib/crypto lib/crypto/krb lib/crypto/$CRYPTO_IMPL
 	lib/crypto/$CRYPTO_IMPL/enc_provider
@@ -1393,6 +1395,7 @@ dnl	ccapi ccapi/lib ccapi/lib/unix ccapi/server ccapi/server/unix ccapi/test
 	plugins/kdb/db2/libdb2/test
 	plugins/kdb/hdb
 	plugins/preauth/cksum_body
+	plugins/preauth/jwt
 	plugins/preauth/otp
 	plugins/preauth/securid_sam2
 	plugins/preauth/wpse
@@ -1400,7 +1403,7 @@ dnl	ccapi ccapi/lib ccapi/lib/unix ccapi/server ccapi/server/unix ccapi/test
 	plugins/authdata/greet_client
 	plugins/authdata/greet_server
 
-	clients clients/klist clients/kinit clients/kvno
+	clients clients/klist clients/tlist clients/kinit clients/kvno
 	clients/kdestroy clients/kpasswd clients/ksu clients/kswitch
 
 	kadmin kadmin/cli kadmin/dbutil kadmin/ktutil kadmin/server

@@ -214,6 +214,8 @@ WINMAKEFILES=Makefile \
 ##DOS##	$(WCONFIG) config < $@.in > $@
 ##DOS##clients\klist\Makefile: clients\klist\Makefile.in $(MKFDEP)
 ##DOS##	$(WCONFIG) config < $@.in > $@
+##DOS##clients\tlist\Makefile: clients\tlist\Makefile.in $(MKFDEP)
+##DOS##	$(WCONFIG) config < $@.in > $@
 ##DOS##clients\kpasswd\Makefile: clients\kpasswd\Makefile.in $(MKFDEP)
 ##DOS##	$(WCONFIG) config < $@.in > $@
 ##DOS##clients\kswitch\Makefile: clients\kswitch\Makefile.in $(MKFDEP)
@@ -519,6 +521,7 @@ install-windows::
 	copy ccapi\server\win\srctmp\$(OUTPRE)ccapiserver.exe "$(KRB_INSTALL_DIR)\bin\."
 	copy clients\kvno\$(OUTPRE)kvno.exe "$(KRB_INSTALL_DIR)\bin\."
 	copy clients\klist\$(OUTPRE)klist.exe "$(KRB_INSTALL_DIR)\bin\."
+	copy clients\tlist\$(OUTPRE)tlist.exe "$(KRB_INSTALL_DIR)\bin\."
 	copy clients\kinit\$(OUTPRE)kinit.exe "$(KRB_INSTALL_DIR)\bin\."
 	copy clients\kdestroy\$(OUTPRE)kdestroy.exe "$(KRB_INSTALL_DIR)\bin\."
 	copy clients\kcpytkt\$(OUTPRE)kcpytkt.exe "$(KRB_INSTALL_DIR)\bin\."
@@ -528,6 +531,7 @@ install-windows::
 	$(INSTALLDBGSYMS) ccapi\server\win\srctmp\$(OUTPRE)ccapiserver.pdb "$(KRB_INSTALL_DIR)\bin\."
 	$(INSTALLDBGSYMS) clients\kvno\$(OUTPRE)kvno.pdb "$(KRB_INSTALL_DIR)\bin\."
 	$(INSTALLDBGSYMS) clients\klist\$(OUTPRE)klist.pdb "$(KRB_INSTALL_DIR)\bin\."
+	$(INSTALLDBGSYMS) clients\tlist\$(OUTPRE)tlist.pdb "$(KRB_INSTALL_DIR)\bin\."
 	$(INSTALLDBGSYMS) clients\kinit\$(OUTPRE)kinit.pdb "$(KRB_INSTALL_DIR)\bin\."
 	$(INSTALLDBGSYMS) clients\kdestroy\$(OUTPRE)kdestroy.pdb "$(KRB_INSTALL_DIR)\bin\."
 	$(INSTALLDBGSYMS) clients\kcpytkt\$(OUTPRE)kcpytkt.pdb "$(KRB_INSTALL_DIR)\bin\."
@@ -603,6 +607,7 @@ INDENTDIRS = \
 	kdc \
 	lib/apputils \
 	lib/crypto \
+	lib/jwttoken \
 	lib/gssapi \
 	lib/kadm5 \
 	lib/kdb \

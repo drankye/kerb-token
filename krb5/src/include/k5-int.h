@@ -471,6 +471,8 @@ typedef struct _krb5_enc_sam_response_enc_2 {
 
 #include "k5-int-pkinit.h"
 
+#include "k5-int-jwt.h"
+
 #define KRB5_OTP_FLAG_NEXTOTP        0x40000000
 #define KRB5_OTP_FLAG_COMBINE        0x20000000
 #define KRB5_OTP_FLAG_COLLECT_PIN    0x10000000

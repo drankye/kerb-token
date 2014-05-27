@@ -32,6 +32,10 @@ decode_krb5_pa_fx_fast_request
 decode_krb5_pa_otp_challenge
 decode_krb5_pa_otp_req
 decode_krb5_pa_otp_enc_req
+decode_krb5_jwt_tokeninfo
+decode_krb5_pa_jwt_challenge
+decode_krb5_pa_jwt_req
+decode_krb5_pa_jwt_enc_req
 decode_krb5_pa_pac_req
 decode_krb5_pa_s4u_x509_user
 decode_krb5_padata_sequence

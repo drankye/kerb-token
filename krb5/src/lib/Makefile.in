@@ -1,11 +1,11 @@
 mydir=lib
-SUBDIRS=crypto krb5 gssapi rpc kdb kadm5 apputils krad
+SUBDIRS=crypto krb5 jwttoken gssapi rpc kdb kadm5 apputils krad
 WINSUBDIRS=crypto krb5 gssapi
 BUILDTOP=$(REL)..
 
 all-unix::
 
-CLEANLIBS = libkrb5.a libkdb5.a libcrypto.a libgssapi_krb5.a libkadm.a \
+CLEANLIBS = libkrb5.a libkdb5.a libjwttoken.a libcrypto.a libgssapi_krb5.a libkadm.a \
 	libcom_err.a libpty.a ibss.a libgssapi.a libapputils.a libkrb5.so \
 	libcrypto.so
 

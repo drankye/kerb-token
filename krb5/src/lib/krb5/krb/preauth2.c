@@ -114,6 +114,8 @@ k5_init_preauth_context(krb5_context context)
                        clpreauth_sam2_initvt);
     k5_plugin_register(context, PLUGIN_INTERFACE_CLPREAUTH, "otp",
                        clpreauth_otp_initvt);
+    k5_plugin_register_dyn(context, PLUGIN_INTERFACE_CLPREAUTH, "jwt",
+                       "preauth");
 
     /* Get all available clpreauth vtables. */
     if (k5_plugin_load_all(context, PLUGIN_INTERFACE_CLPREAUTH, &modules))
