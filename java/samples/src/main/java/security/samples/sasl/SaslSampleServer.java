@@ -33,8 +33,8 @@ public class SaslSampleServer extends SampleServer {
         super(args);
 
         this.mechanism = "GSSAPI";
-        this.serviceProtocol = args[2];
-        this.serverFqdn = args[3];
+        this.serviceProtocol = args[1];
+        this.serverFqdn = args[2];
     }
 
     @Override

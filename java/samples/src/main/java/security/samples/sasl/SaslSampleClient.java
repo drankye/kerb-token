@@ -15,7 +15,7 @@ public class SaslSampleClient extends SampleClient {
     @Override
     protected void usage(String[] args) {
         if (args.length < 4) {
-            System.err.println("Usage: java <options> TokenSaslSampleClient "
+            System.err.println("Usage: java <options> SaslSampleClient "
                     + "<server-host> <server-port> <service-protocol> <server-fqdn>");
             System.exit(-1);
         }

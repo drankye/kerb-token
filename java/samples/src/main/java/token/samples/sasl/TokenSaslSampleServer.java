@@ -28,13 +28,22 @@ public class TokenSaslSampleServer extends SaslSampleServer {
         this.mechanism = "GSSAPIEXT";
     }
 
+    @Override
     protected void doWith(SaslServer ss, Map<String, Object> props,
                           Transport.Connection conn) throws Exception {
+
+        super.doWith(ss, props, conn);
+
         GSSContext context = (GSSContext) props.get(GssKrb5ServerExt.GSSCONTEXT_KEY);
         doWith(context, conn);
+        ss.getNegotiatedProperty(GssKrb5ServerExt.GSSCONTEXT_KEY);
     }
 
     protected void doWith(GSSContext context, Transport.Connection conn) throws Exception {
         AuthzDataDumper.checkAuthzData(context);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new TokenSaslSampleServer(args).run();
     }
 }

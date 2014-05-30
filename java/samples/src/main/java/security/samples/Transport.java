@@ -59,8 +59,8 @@ public class Transport {
 
         public void sendMessage(Message msg) throws IOException {
             if (msg != null) {
-                sendToken(msg.body);
                 sendToken(msg.header);
+                sendToken(msg.body);
             }
         }
 
@@ -83,9 +83,9 @@ public class Transport {
         }
 
         public Message recvMessage() throws IOException {
-            byte[] token = recvToken();
-            byte[] status = recvToken();
-            Message msg = new Message(token, status);
+            byte[] header = recvToken();
+            byte[] body = recvToken();
+            Message msg = new Message(header, body);
             return msg;
         }
     }

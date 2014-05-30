@@ -1,4 +1,5 @@
-package kerb.token.sasl.gsskrb5ext;/*
+package kerb.token.sasl.gsskrb5ext;
+/*
  * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -134,9 +135,6 @@ public class GssKrb5ServerExt extends GssKrb5BaseExt implements SaslServer {
             // Create a context using the server's credentials
             secCtx = mgr.createContext(cred);
 
-            // To be accessed outside of SASL layer
-            props.put(GSSCONTEXT_KEY, secCtx);
-
             if ((allQop&INTEGRITY_ONLY_PROTECTION) != 0) {
                 // Might need integrity
                 secCtx.requestInteg(true);
@@ -152,6 +150,14 @@ public class GssKrb5ServerExt extends GssKrb5BaseExt implements SaslServer {
         logger.log(Level.FINE, "KRB5SRV02:Initialization complete");
     }
 
+    @Override
+    public Object getNegotiatedProperty(String propName) {
+        // To be accessed outside of SASL layer
+        if (propName != null && propName.equals(GSSCONTEXT_KEY)) {
+            return secCtx;
+        }
+        return super.getNegotiatedProperty(propName);
+    }
 
     /**
      * Processes the response data.

@@ -1,10 +1,10 @@
-package kerb.token.login;
+package kerb.token;
 
 import java.io.*;
 
 public class TokenCache {
-    private static final String DEFAULT_TOKEN_CACHE_PATH = ".auth";
-    private static final String TOKEN_CACHE_FILE = ".token";
+    private static final String DEFAULT_TOKEN_CACHE_PATH = ".tokenauth";
+    private static final String TOKEN_CACHE_FILE = ".tokenauth.token";
 
     public static String readToken(String tokenCacheFile) {
         File cacheFile = null;
@@ -15,7 +15,7 @@ public class TokenCache {
                 throw new RuntimeException("Invalid token cache specified: " + tokenCacheFile);
             };
         } else {
-            cacheFile = getDefaultCachePath();
+            cacheFile = getDefaultTokenCache();
             if (!cacheFile.exists()) {
                 throw new RuntimeException("No token cache available by default");
             };
@@ -37,7 +37,7 @@ public class TokenCache {
     }
 
     public static void writeToken(String token) {
-        File cacheFile = getDefaultCachePath();
+        File cacheFile = getDefaultTokenCache();
 
         try {
             Writer writer = new FileWriter(cacheFile);
@@ -56,9 +56,8 @@ public class TokenCache {
         }
     }
 
-    public static File getDefaultCachePath() {
+    public static File getDefaultTokenCache() {
         String homeDir = System.getProperty("user.home", DEFAULT_TOKEN_CACHE_PATH);
-
         return new File(homeDir, TOKEN_CACHE_FILE);
     }
 }

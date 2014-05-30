@@ -29,3 +29,5 @@ java/nimbus-jose-jwt
 *.x86_64
 *.hex
 
+java/token/target/
+java/run/lib/

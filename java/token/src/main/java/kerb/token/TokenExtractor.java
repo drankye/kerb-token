@@ -1,17 +1,16 @@
-package token.samples;
+package kerb.token;
 
 import com.sun.security.jgss.AuthorizationDataEntry;
 import com.sun.security.jgss.ExtendedGSSContext;
 import com.sun.security.jgss.InquireType;
-import kerb.token.TokenTool;
 import org.haox.asn1.type.Asn1SequenceOf;
 import org.ietf.jgss.GSSContext;
+import org.ietf.jgss.GSSException;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-public class AuthzDataDumper {
+public class TokenExtractor {
     static final int JWT_AUTHZ_DATA_TYPE = 81;
     public static final int AD_IF_RELEVANT_TYPE = 1;
 
@@ -25,7 +24,7 @@ public class AuthzDataDumper {
 
     }
 
-    public static void checkAuthzData(GSSContext context) throws Exception {
+    public static KerbToken checkAuthzData(GSSContext context) throws GSSException, IOException {
         System.out.println("Looking for token from authorization data in GSSContext");
 
         Object authzData = null;
@@ -37,33 +36,32 @@ public class AuthzDataDumper {
 
         if (authzData != null) {
             AuthorizationDataEntry[] authzEntries = (AuthorizationDataEntry[]) authzData;
-            System.out.println("Got authzData entries: " + authzEntries.length);
+            KerbToken resultToken = null;
             for (int i = 0; i < authzEntries.length; ++i) {
-                AuthzDataDumper.dumpAuthzData(authzEntries[i]);
+                resultToken = getAuthzToken(authzEntries[i]);
+                if (resultToken != null) {
+                    return resultToken;
+                }
             }
         }
+        return null;
     }
 
-    public static void dumpAuthzData(AuthorizationDataEntry authzDataEntry) throws Exception {
+    public static KerbToken getAuthzToken(AuthorizationDataEntry authzDataEntry) throws IOException {
         if (authzDataEntry.getType() == AD_IF_RELEVANT_TYPE) {
             String token = getToken(authzDataEntry);
-            if (token != null) {
-                System.out.println("========== Extracted a token: " + token + " ==========");
-            } else {
-                return;
+            if (token == null) {
+                return null;
             }
 
-            Map<String, Object> tokenAttrs = null;
             try {
-                tokenAttrs = TokenTool.decodeAndExtractTokenAttributes(token);
+                return TokenTool.fromJwtToken(token);
             } catch (Exception e) {
                 // noop when not jwt token
             }
-
-            for (String name : tokenAttrs.keySet()) {
-                System.out.println(name + ": " + tokenAttrs.get(name));
-            }
         }
+
+        return null;
     }
 
     public static String getToken(AuthorizationDataEntry authzDataEntry) throws IOException {

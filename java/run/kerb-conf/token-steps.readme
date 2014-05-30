@@ -1,0 +1,14 @@
+1. steps for pkinit and anonymous 
+openssl genrsa -out cakey.pem 2048
+openssl req -key cakey.pem -new -x509 -out cacert.pem -days 3650
+vi extensions.kdc
+openssl genrsa -out kdckey.pem 2048
+openssl req -new -out kdc.req -key kdckey.pem
+env REALM=SH.INTEL.COM openssl x509 -req -in kdc.req -CAkey cakey.pem -CA cacert.pem -out kdc.pem -days 365 -extfile extensions.kdc -extensions kdc_cert -CAcreateserial
+cp cacert.pem kdc.conf kdc.pem kdckey.pem /usr/local/var/krb5kdc/
+cp cacert.pem /etc/
+
+2. get tgt
+addprinc -randkey +requires_preauth TOKEN_USER@SH.INTEL.COM
+kinit -c /tmp/krb5cc_myhost -n @SH.INTEL.COM
+kinit -T /tmp/krb5cc_myhost -c /tmp/krb5cc_drankye -X token=abcdefghiklmn drankye@SH.INTEL.COM

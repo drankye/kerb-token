@@ -16,8 +16,8 @@ public abstract class SampleClient {
     public SampleClient(String[] args) throws Exception {
         usage(args);
 
-        String hostName = args[1];
-        short port = (short) Integer.parseInt(args[2]);
+        String hostName = args[0];
+        short port = (short) Integer.parseInt(args[1]);
 
         this.conn = Transport.Connector.connect(hostName, port);
     }

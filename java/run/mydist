@@ -1,0 +1,7 @@
+cp ../nimbus-jose-jwt/target/nimbus-jose-jwt-1.0-SNAPSHOT.jar lib/
+cp ../../../haox/haox-asn1/target/haox-asn1-1.0-SNAPSHOT.jar lib/
+
+cd ../token && mvn clean package install && cd -
+cp ../token/target/kerb-token-1.0-SNAPSHOT.jar lib/
+cd ../samples && mvn clean package && cd -
+cp ../samples/target/security-samples-1.0-SNAPSHOT.jar lib/
