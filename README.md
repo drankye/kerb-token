@@ -23,10 +23,12 @@ jwt-token.so  otp.so  pkinit.so
 
 In token-preauth section,
 
-# This configures the token signature verification key file
+This configures the token signature verification key file
+
 token-authority-cert: <TOKEN-AUTHORITY-VERIFICATON_KEY_FILE>
 
-# This configures the mapping between token atrribute(s) and krb principal account
+This configures the mapping between token atrribute(s) and krb principal account
+
 token-principal-mapping: <TOKEN-ATTRIBUTE_FOR_USERNAME>
 
 2 Optionally, PKINIT
@@ -82,7 +84,7 @@ SASL GSSAPI mechanism wraps GSSAPI level but it doesn't support for now to expos
 able to do above using the mechanism. We need to come up our own SASL mechanism like GSSAPI but allow application to 
 access the needed GSSContext to do above for querying and extracting tokens.
 
-2. A new JAAS login module: KerbTokenAuthnLoginModule
+2. A new JAAS login module: Krb5TokenAuthnLoginModule
 
 This module can be configured and get token from token cache, then does the whole work the following:
 
@@ -90,3 +92,27 @@ This module can be configured and get token from token cache, then does the whol
 2) kinit with the armor ticket and token, gets tgt and puts it in specified credentail cache;
 3) Wraps and exectues Krb5LoginModule with above credential cache;
 4) As a result of 3), all necessary credential is validated and put in JAVA authorization context.
+
+== Project layout
+
+|--java
+|   |
+|   |---samples: java security samples to show how to write GSSAPI and SASL applications
+|   |
+|   |---token:  Krb5TokenAuthnLoginModule module, SASL GSSAPIExt mechanism for token, and samples to show how token can be
+|                extracted from tickets
+|
+|--krb5
+|   |
+|   |--src/plugins/preauth/jwt: token-preauth plugin for KDC and clients
+|   |
+|   |--krb5/src/lib/jwttoken: token library for facilities to process and verify tokens
+
+== Notes
+
+This effort is still on the going, and not completely finished yet. Particularly, the token decryption and verification is
+to be done.
+
+== License
+
+Apache License V2
