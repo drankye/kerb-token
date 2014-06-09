@@ -1,4 +1,4 @@
-# Kerberos Token-preauth ====
+# Kerberos Token-preauth
 
 ## Kerberos token-preauth
 This extension allows 3rd party token(jwt) can be used to authenticate to Kerberos and obtain a ticket granting ticket.
@@ -9,27 +9,26 @@ PKI is used to establish the trust relationship between 3rd party token issuer a
 
 ### Deployment
 
-1) This assumes you have a jwt token authority or provider.
+* This assumes you have a jwt token authority or provider.
   
-2) It provides jwt-token module(so file) and implements both client side and kdc side corresponding plugins to make it work.
+* It provides jwt-token module(so file) and implements both client side and kdc side corresponding plugins to make it work.
 To deploy, on both KDC host and client hosts:
-
+<pre>
 cp jwt.so /usr/local/lib/krb5/plugins/preauth/
 jwt-token.so  otp.so  pkinit.so
+</pre>
 
 ### Configuration
 
-1) In KDC side, in kdc.conf:
-
-In token-preauth section,
+* In KDC side, in kdc.conf, in token-preauth section,
 
 This configures the token signature verification key file
 
-token-authority-cert: <TOKEN-AUTHORITY-VERIFICATON_KEY_FILE>
+token-authority-signature-key: signature key file to verify token
 
 This configures the mapping between token atrribute(s) and krb principal account
 
-token-principal-mapping: <TOKEN-ATTRIBUTE_FOR_USERNAME>
+token-principal-mapping: token attribute to determine krb principal and realm
 
 ## Optionally, PKINIT
 
@@ -44,15 +43,15 @@ We suggest PKINIT since PKINIT itself can be employed for end users to authentic
 
 ## How to use
 
-1. Assumes you have a token;
+* Assumes you have a token;
 
-2. Get an armor tgt assuming you use anonymous PKINIT option
+* Get an armor tgt assuming you use anonymous PKINIT option
 
 <pre>
 kinit -c /tmp/krb5cc_armor -n @<YOUR_REALM>
 </pre>
 
-3. Get tgt using your token, like
+* Get tgt using your token, like
 
 <pre>
 kinit -T /tmp/krb5cc_armor_token -c /tmp/krb5cc_my -X token=<YOUR-JWT-TOKEN> <YOUR-PRINCIPAL>
@@ -67,7 +66,7 @@ ktinit [-t token | -T token-cache-file] [-c kerb-ccache-file]
       when no token specified, ~/.tokenauth.token will be used by default
 </pre>
 
-4. With the credential cached tgt, you can access services as normal.
+* With the credential cached tgt, you can access services as normal.
 
 ## JAVA 
 
@@ -78,12 +77,12 @@ service ticket so that
 a. authenticate client with the token
 b. extract identity attributes and labels from token for fine-grained  authorization.
 
-1. GSSAPI
+#### GSSAPI
 
 It's very simple, since JRE GSSAPI has already support to query info like authorization data from tickets. What we need
 is to query and extract the authorization data from tickets, then decoding it(ASN.1) and get the token from it.
 
-2. SASL
+#### SASL
 
 SASL GSSAPI mechanism wraps GSSAPI level but it doesn't support for now to expose the GSSContext outside thus we won't
 able to do above using the mechanism. We need to come up our own SASL mechanism like GSSAPI but allow application to 
