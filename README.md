@@ -1,6 +1,6 @@
 # Kerberos Token-preauth
 
-## Kerberos token-preauth
+## Token-preauth
 This extension allows 3rd party token(jwt) can be used to authenticate to Kerberos and obtain a ticket granting ticket.
 It bases on Kerberos preauth framework(FAST tunnel) and provides another preauthent method similar to OTP and PKINIT. 
 It allows token can be used as credential to authenticate to KDC for a normal principal instead of user password or key. 
