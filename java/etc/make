@@ -1,7 +1,0 @@
-javac -g -cp lib/haox-asn1-1.0-SNAPSHOT.jar -d output/ src/SampleServer.java
-javac -g -d output/ src/SampleClient.java
-
-javac -g -cp lib/haox-asn1-1.0-SNAPSHOT.jar -d output/ src/SaslSampleServer.java src/gsskrb5ext/GssKrb5ServerExt.java src/gsskrb5ext/GssKrb5BaseExt.java
-
-javac -g -d output/ src/SaslSampleClient.java src/gsskrb5ext/GssKrb5ClientExt.java src/gsskrb5ext/GssKrb5BaseExt.java
-

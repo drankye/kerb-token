@@ -1,10 +1,12 @@
 package token.samples.sasl;
 
-import kerb.token.sasl.gsskrb5ext.GssKrb5ClientExt;
+import kerb.token.sasl.gsskrb5ext.GssKrb5ExtProvider;
+
+import java.security.Security;
 
 public class TokenSaslSampleClient extends TokenSaslSampleServer {
     static {
-        GssKrb5ClientExt.init();
+        Security.addProvider(new GssKrb5ExtProvider());
     }
 
     public TokenSaslSampleClient(String[] args) throws Exception {

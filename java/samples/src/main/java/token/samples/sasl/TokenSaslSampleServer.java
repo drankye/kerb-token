@@ -1,17 +1,19 @@
 package token.samples.sasl;
 
+import kerb.token.sasl.gsskrb5ext.GssKrb5ExtProvider;
+import kerb.token.sasl.gsskrb5ext.GssKrb5ServerExt;
 import org.ietf.jgss.GSSContext;
 import security.samples.Transport;
 import security.samples.sasl.SaslSampleServer;
 import token.samples.AuthzDataDumper;
-import kerb.token.sasl.gsskrb5ext.GssKrb5ServerExt;
 
 import javax.security.sasl.SaslServer;
+import java.security.Security;
 import java.util.Map;
 
 public class TokenSaslSampleServer extends SaslSampleServer {
     static {
-        GssKrb5ServerExt.init();
+        Security.addProvider(new GssKrb5ExtProvider());
     }
 
     @Override
@@ -34,7 +36,7 @@ public class TokenSaslSampleServer extends SaslSampleServer {
 
         super.doWith(ss, props, conn);
 
-        GSSContext context = (GSSContext) props.get(GssKrb5ServerExt.GSSCONTEXT_KEY);
+        GSSContext context = (GSSContext) ss.getNegotiatedProperty(GssKrb5ServerExt.GSSCONTEXT_KEY);
         doWith(context, conn);
         ss.getNegotiatedProperty(GssKrb5ServerExt.GSSCONTEXT_KEY);
     }

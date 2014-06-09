@@ -74,32 +74,6 @@ public class GssKrb5ServerExt extends GssKrb5BaseExt implements SaslServer {
 
     public static final String GSSCONTEXT_KEY = "GSSCONTEXT_INQUERY";
 
-    public static void init() {
-        Security.addProvider(new SecurityProvider());
-    }
-
-    static class SecurityProvider extends Provider {
-        public SecurityProvider() {
-            super("GSSAPIEXT", 1.0, "GSSAPI-EXT Server");
-            put("SaslServerFactory.GSSAPIEXT",
-                    SaslGssapiExtServerFactory.class.getName());
-        }
-    }
-
-    public static class SaslGssapiExtServerFactory implements SaslServerFactory {
-        @Override
-        public SaslServer createSaslServer(String mechanism, String protocol,
-                String serverName, Map<String,?> props, CallbackHandler cbh)
-                        throws SaslException {
-            return "GSSAPIEXT".equals(mechanism) ? 
-                    new GssKrb5ServerExt(protocol, serverName, props, cbh) : null; 
-        }
-        @Override
-        public String[] getMechanismNames(Map<String,?> props){
-            return new String[] {"GSSAPIEXT"};
-        }
-    }
-
     private int handshakeStage = 0;
     private String peer;
     private String authzid;

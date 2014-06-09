@@ -88,43 +88,6 @@ public class GssKrb5ClientExt extends GssKrb5BaseExt implements SaslClient {
     private boolean mutual = false;       // default false
     private byte[] authzID;
 
-    public static void init() {
-        Security.addProvider(new SecurityProvider());
-    }
-
-    static class SecurityProvider extends Provider {
-        public SecurityProvider() {
-            super("GSSAPIEXT", 1.0, "GSSAPI-EXT Client");
-            put("SaslClientFactory.GSSAPIEXT",
-                    SaslGssapiExtClientFactory.class.getName());
-        }
-    }
-
-    public static class SaslGssapiExtClientFactory implements SaslClientFactory {
-        private static final String myMechs[] = { "GSSAPIEXT" };
-        
-        @Override
-        public SaslClient createSaslClient(
-                String[] mechanisms, String authorizationId, String protocol,
-                String serverName, Map<String, ?> props, CallbackHandler cbh)
-                throws SaslException {
-            for (int i = 0; i < mechanisms.length; i++) {
-                if (mechanisms[i].equals(myMechs[0])) {
-                    return new GssKrb5ClientExt(authorizationId,
-                            protocol,
-                            serverName,
-                            props,
-                            cbh);
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String[] getMechanismNames(Map<String, ?> props) {
-            return myMechs;
-        }
-    }
 
     /**
      * Creates a SASL mechanism with client credentials that it needs
