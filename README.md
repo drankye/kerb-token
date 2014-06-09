@@ -86,7 +86,7 @@ is to query and extract the authorization data from tickets, then decoding it(AS
 
 SASL GSSAPI mechanism wraps GSSAPI level but it doesn't support for now to expose the GSSContext outside thus we won't
 able to do above using the mechanism. We need to come up our own SASL mechanism like GSSAPI but allow application to 
-access the needed GSSContext to do above for querying and extracting tokens.
+access the needed GSSContext to do above for querying and extracting tokens. Ref. [JDK-8044085](https://bugs.openjdk.java.net/browse/JDK-8044085)
 
 ### A new JAAS login module: Krb5TokenAuthnLoginModule
 
