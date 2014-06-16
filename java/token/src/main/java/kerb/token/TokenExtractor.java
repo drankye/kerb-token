@@ -16,8 +16,8 @@ public class TokenExtractor {
 
     /**
      AuthorizationData       ::= SEQUENCE OF SEQUENCE {
-     ad-type         [0] Int32,
-     ad-data         [1] OCTET STRING
+         ad-type         [0] Int32,
+         ad-data         [1] OCTET STRING
      }
      */
     public static class AuthorizationData extends Asn1SequenceOf<AuthzDataEntry> {

@@ -5,14 +5,20 @@ import org.haox.asn1.type.Asn1Integer;
 import org.haox.asn1.type.Asn1OctetString;
 import org.haox.asn1.type.Asn1SequenceType;
 
+/**
+ AuthorizationData       ::= SEQUENCE OF SEQUENCE {
+     ad-type         [0] Int32,
+     ad-data         [1] OCTET STRING
+ }
+ */
 public class AuthzDataEntry extends Asn1SequenceType {
     static int AD_TYPE = 0;
     static int AD_DATA = 1;
 
     public AuthzDataEntry() {
         super(new Asn1FieldInfo[] {
-                new Asn1FieldInfo(AD_TYPE, 0, Asn1Integer.class),
-                new Asn1FieldInfo(AD_DATA, 1, Asn1OctetString.class)
+                new Asn1FieldInfo(AD_TYPE, Asn1Integer.class),
+                new Asn1FieldInfo(AD_DATA, Asn1OctetString.class)
         });
     }
 
